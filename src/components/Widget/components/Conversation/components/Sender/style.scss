@@ -1,4 +1,4 @@
-@import 'variables/colors';
+@import "variables/colors";
 
 .rcw-sender {
   align-items: center;
@@ -30,16 +30,31 @@
   }
 }
 
-.rcw-send {
-  background: $grey-2;
-  border: 0;
+// .rcw-send {
+//   background: $grey-2;
+//   border: 0;
 
-  .rcw-send-icon {
-    height: 25px;
+//   .rcw-send-icon {
+//     height: 25px;
+//   }
+// }
+
+.rcw-send-activate {
+  background: #007a5a;
+  border: 0;
+  border-radius: 3px;
+  padding-bottom: 5px;
+
+  .rcw-send-icon-activate {
+    height: 20px;
   }
 }
 
-@media screen and (max-width: 800px)  {
+.grey-background {
+  background: $grey-2;
+}
+
+@media screen and (max-width: 800px) {
   .rcw-sender {
     border-radius: 0;
     flex-shrink: 0;

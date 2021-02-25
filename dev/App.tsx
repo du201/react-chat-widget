@@ -30,7 +30,7 @@ export default class App extends Component {
 
   handleSubmit = (msgText: string) => {
     if(msgText.length < 80) {
-      addUserMessage("Uh oh, please write a bit more.");
+      addUserMessage("Uh oh, please write a bit more my buddy.");
       return false;
     }
     return true;
@@ -41,7 +41,7 @@ export default class App extends Component {
       <div>
         <button style={{position: 'absolute', right: 40, bottom: 150}}>test</button>
         <Widget
-          title="Bienvenido"
+          title="Bienvenido123123"
           subtitle="Asistente virtual"
           senderPlaceHolder="Escribe aquí ..."
           handleNewUserMessage={this.handleNewUserMessage}

@@ -24,10 +24,14 @@ module.exports = {
     hot: true
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js', '.css']
   },
   module: {
     rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
       {
         test: /\.ts(x?)$/,
         exclude: /node_modules/,

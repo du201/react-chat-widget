@@ -97,7 +97,7 @@ const defaultProps = {
   showTimeStamp: true,
   imagePreview: false,
   zoomStep: 80,
-  showEmoji: false
+  showEmoji: true
 };
 ConnectedWidget.defaultProps = defaultProps;
 
