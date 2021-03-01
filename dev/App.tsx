@@ -39,7 +39,6 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <button style={{position: 'absolute', right: 40, bottom: 150}}>test</button>
         <Widget
           title="Bienvenido123123"
           subtitle="Asistente virtual"
