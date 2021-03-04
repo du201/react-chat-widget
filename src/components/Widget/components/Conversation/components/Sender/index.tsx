@@ -64,6 +64,13 @@ function Sender({ sendMessage, placeholder, disabledInput, autofocus, onTextInpu
     setMouseOverEmoji(false);
   }
 
+  // A hack to clear the textbox after type "ENTER"
+  let handleTextInput = (e) => {
+    if (e.key === "Enter") {
+      setTimeout(() => setInput(""), 10); // this is requried to not block sending messege
+    }
+  } 
+
   return (
     <form className="rcw-sender" onSubmit={sendMessage}>
       <input
@@ -76,7 +83,8 @@ function Sender({ sendMessage, placeholder, disabledInput, autofocus, onTextInpu
         autoFocus={autofocus}
         autoComplete="off"
         value={input}
-        onChange={(event) => setInput(event.target.value)}
+        onKeyPress={(event) => handleTextInput(event)}
+        onChange={(e) => setInput(e.target.value)}
         // onChange={onTextInputChange}
       />
       <span onClick={() => openEmojiSelectMenu()}>
