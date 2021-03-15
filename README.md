@@ -171,11 +171,10 @@ export default App;
 
 |prop|type|required|default value|description|
 |---|--- |---     |---          |---        |
-|**handleNewUserMessage**|(...args: any[]) => any|YES| |Function to handle the user input, will receive the full text message when submitted|
 |**title**|string|NO|'Welcome'|Title of the widget|
 |**subtitle**|string|NO|'This is your chat subtitle'|Subtitle of the widget|
 |**senderPlaceHolder**|string|NO|'Type a message...'|The placeholder of the message input|
-|**profileAvatar**|string|NO| |The profile image that will be set on the responses|
+(temp)|**profileAvatar**|string|NO| |The profile image that will be set on the responses|
 |**titleAvatar**|string|NO| |The picture image that will be shown next to the chat title|
 |**showCloseButton**|boolean|NO|false|Show or hide the close button in full screen mode|
 |**fullScreenMode**|boolean|NO|false|Allow the use of full screen in full desktop mode|
@@ -187,8 +186,15 @@ export default App;
 |**launcherOpenLabel**|string|NO|'Open chat'|Alt value for the laucher when closed|
 |**launcherCloseLabel**|string|NO|'Close chat'|Alt value for the laucher when open|
 |**sendButtonAlt**|string|NO|'Send'|Send button alt for a11y purposes|
+
+(required props below:)
+|prop|type|required|default value|description|
+|---|--- |---     |---          |---        |
+|**handleNewUserMessage**|(...args: any[]) => any|YES| |Function to handle the user input, will receive the "full text message" when submitted (used for sending)|
 |**handleTextInputChange**|(event) => any|NO| |Prop that triggers on input change|
-|**handleSubmit**|(event) => any|NO| |Prop that triggers when a message is submitted, used for custom validation|
+|**input**|string|NO| |user input from the chat enter box, should be a state|
+|**setInput**|(event) => any|NO| |same as onKeyPress of an input|
+|**showEmoji**|boolean|NO| |whether to enable the emoji functionality|
 
 #### Styles
 
