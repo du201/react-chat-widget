@@ -184,6 +184,8 @@ export default App;
 |**sendButtonAlt**|string|NO|'Send'|Send button alt for a11y purposes|
 
 (required props below:)
+|prop|type|required|default value|description|
+|---|--- |---     |---          |---        |
 |**handleNewUserMessage**|(...args: any[]) => any|YES| |Function to handle the user input, will receive the "full text message" when submitted (used for sending)|
 |**handleTextInputChange**|(event) => any|NO| |Prop that triggers on input change|
 |**input**|string|NO| |user input from the chat enter box, should be a state|
