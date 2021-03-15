@@ -23,10 +23,13 @@ type Props = {
   profileAvatar?: string;
   titleAvatar?: string;
   onQuickButtonClicked?: AnyFunction;
-  onTextInputChange?: (event: any) => void;
+  onTextInputChange: (event: any) => void;
   sendButtonAlt: string;
   showTimeStamp: boolean;
   showEmoji: boolean;
+  input: string;
+  setInput: AnyFunction;
+  handleSelectEmoji: AnyFunction;
 };
 
 function Conversation({
@@ -45,7 +48,10 @@ function Conversation({
   onTextInputChange,
   sendButtonAlt,
   showTimeStamp,
-  showEmoji
+  showEmoji,
+  input,
+  setInput,
+  handleSelectEmoji
 }: Props) {
   return (
     <div className={cn('rcw-conversation-container', className)} aria-live="polite">
@@ -66,6 +72,9 @@ function Conversation({
         onTextInputChange={onTextInputChange}
         buttonAlt={sendButtonAlt}
         showEmoji={showEmoji}
+        input={input}
+        setInput={setInput}
+        handleSelectEmoji={handleSelectEmoji}
       />
     </div>
   );

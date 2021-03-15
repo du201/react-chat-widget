@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 
 import Widget from './components/Widget';
 
-import store from  './store';
+import store from './store';
 
 import { AnyFunction } from './utils/types';
 
@@ -19,7 +19,7 @@ type Props = {
   autofocus?: boolean;
   profileAvatar?: string;
   launcher?: AnyFunction;
-  handleTextInputChange?: (event: any) => void;
+  handleTextInputChange: (event: any) => void;
   chatId?: string;
   launcherOpenLabel?: string,
   launcherCloseLabel?: string,
@@ -29,6 +29,9 @@ type Props = {
   zoomStep?: number;
   handleSubmit?: AnyFunction;
   showEmoji: boolean;
+  input: string;
+  setInput: AnyFunction;
+  handleSelectEmoji: AnyFunction;
 } & typeof defaultProps;
 
 function ConnectedWidget({
@@ -52,7 +55,10 @@ function ConnectedWidget({
   imagePreview,
   zoomStep,
   handleSubmit,
-  showEmoji
+  showEmoji,
+  input,
+  setInput,
+  handleSelectEmoji
 }: Props) {
   return (
     <Provider store={store}>
@@ -60,7 +66,7 @@ function ConnectedWidget({
         title={title}
         titleAvatar={titleAvatar}
         subtitle={subtitle}
-        handleNewUserMessage={handleNewUserMessage}
+        handleNewUserMessage={handleNewUserMessage} //when user clicks send button
         handleQuickButtonClicked={handleQuickButtonClicked}
         senderPlaceHolder={senderPlaceHolder}
         profileAvatar={profileAvatar}
@@ -78,6 +84,9 @@ function ConnectedWidget({
         zoomStep={zoomStep}
         handleSubmit={handleSubmit}
         showEmoji={showEmoji}
+        input={input}
+        setInput={setInput}
+        handleSelectEmoji={handleSelectEmoji}
       />
     </Provider>
   );

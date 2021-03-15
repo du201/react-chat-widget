@@ -10,6 +10,7 @@ import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSmileWink } from '@fortawesome/free-regular-svg-icons'
+import { AnyFunction } from '../../../../../../utils/types';
 
 
 type Props = {
@@ -18,13 +19,16 @@ type Props = {
   autofocus: boolean;
   sendMessage: (event: any) => void;
   buttonAlt: string;
-  onTextInputChange?: (event: any) => void;
+  onTextInputChange: (event: any) => void;
   showEmoji: boolean;
+  input: string;
+  setInput: AnyFunction;
+  handleSelectEmoji: AnyFunction;
 }
 
-function Sender({ sendMessage, placeholder, disabledInput, autofocus, onTextInputChange, buttonAlt, showEmoji }: Props) {
+function Sender({ sendMessage, placeholder, disabledInput, autofocus, onTextInputChange, buttonAlt, showEmoji, input, setInput, handleSelectEmoji }: Props) {
   let [openEmoji, setOpenEmoji] = useState(false);
-  let [input, setInput] = useState("");
+  // let [input, setInput] = useState("");
   let [mouseOverEmoji, setMouseOverEmoji] = useState(false);
 
   const showChat = useSelector((state: GlobalState) => state.behavior.showChat);
@@ -41,19 +45,12 @@ function Sender({ sendMessage, placeholder, disabledInput, autofocus, onTextInpu
   let closeEmojiSelectMenu = () => {
     setOpenEmoji(!openEmoji);
     document.removeEventListener("click", closeEmojiSelectMenu);
-    console.log("closed");
+    // console.log("closed");
   };
 
   let openEmojiSelectMenu = () => {
     setOpenEmoji(!openEmoji);
-    console.log("opened");
-  };
-
-  let handleSelectEmoji = (emoji) => {
-    console.log(emoji);
-    console.log(emoji.native);
-    let newInput = input + emoji.native;
-    setInput(newInput);
+    // console.log("opened");
   };
 
   let handleMouseOverEmoji = () => {
@@ -63,13 +60,6 @@ function Sender({ sendMessage, placeholder, disabledInput, autofocus, onTextInpu
   let handleMouseLeaveEmoji = () => {
     setMouseOverEmoji(false);
   }
-
-  // A hack to clear the textbox after type "ENTER"
-  let handleTextInput = (e) => {
-    if (e.key === "Enter") {
-      setTimeout(() => setInput(""), 10); // this is requried to not block sending messege
-    }
-  } 
 
   return (
     <form className="rcw-sender" onSubmit={sendMessage}>
@@ -83,28 +73,28 @@ function Sender({ sendMessage, placeholder, disabledInput, autofocus, onTextInpu
         autoFocus={autofocus}
         autoComplete="off"
         value={input}
-        onKeyPress={(event) => handleTextInput(event)}
-        onChange={(e) => setInput(e.target.value)}
-        // onChange={onTextInputChange}
+        onKeyPress={setInput}
+        // onChange={(e) => setInput(e.target.value)}
+        onChange={onTextInputChange}
       />
       <span onClick={() => openEmojiSelectMenu()}>
-        {showEmoji ? 
-          <span onMouseEnter={handleMouseOverEmoji} 
-                onMouseOut={handleMouseLeaveEmoji} 
-                style={mouseOverEmoji ? {display:"inline-block", width:"2rem", height:"2rem", backgroundColor:"#E2E2E2"} : {display:"inline-block", width:"2rem", height:"2rem"}}
-                className="d-flex justify-content-center align-items-center">
-            {mouseOverEmoji ? 
+        {showEmoji ?
+          <span onMouseEnter={handleMouseOverEmoji}
+            onMouseOut={handleMouseLeaveEmoji}
+            style={mouseOverEmoji ? { display: "inline-block", width: "2rem", height: "2rem", backgroundColor: "#E2E2E2" } : { display: "inline-block", width: "2rem", height: "2rem" }}
+            className="d-flex justify-content-center align-items-center">
+            {mouseOverEmoji ?
 
               String.fromCodePoint(0x1f609) :
-              <FontAwesomeIcon icon={faSmileWink} style={{fontSize:"1.2rem"}}/>
+              <FontAwesomeIcon icon={faSmileWink} style={{ fontSize: "1.2rem" }} />
               // <span style={{position:"relative", bottom:"2px", left:"2px"}}>
             }
-          </span> 
+          </span>
           : null}
       </span>
-      {openEmoji ? 
-        <Picker 
-          set='apple' 
+      {openEmoji ?
+        <Picker
+          set='apple'
           onSelect={handleSelectEmoji}
           emojiTooltip={true}
           showPreview={false}

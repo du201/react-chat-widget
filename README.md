@@ -4,6 +4,10 @@
 
 [![FEArmy](./assets/FEA_open_source_sm.png)](https://github.com/orgs/Wolox/teams/front-end-army/members)
 
+# du201's Forked Version
+This version adds the emoji functionality to the chat
+Besides, css-loader is added to webpack due to the use of bootstrap
+
 ## Sponsors
 
 <div>

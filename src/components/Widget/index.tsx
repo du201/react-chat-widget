@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { toggleChat, addUserMessage } from '../../store/actions';
@@ -18,7 +18,7 @@ type Props = {
   customLauncher?: AnyFunction;
   handleNewUserMessage: AnyFunction;
   handleQuickButtonClicked?: AnyFunction;
-  handleTextInputChange?: (event: any) => void;
+  handleTextInputChange: (event: any) => void;
   chatId: string;
   launcherOpenLabel: string;
   launcherCloseLabel: string;
@@ -28,6 +28,9 @@ type Props = {
   zoomStep?: number;
   handleSubmit?: AnyFunction;
   showEmoji: boolean;
+  input: string;
+  setInput: AnyFunction;
+  handleSelectEmoji: AnyFunction;
 }
 
 function Widget({
@@ -51,8 +54,12 @@ function Widget({
   imagePreview,
   zoomStep,
   handleSubmit,
-  showEmoji
+  showEmoji,
+  input,
+  setInput,
+  handleSelectEmoji
 }: Props) {
+  // let [input, setInput] = useState("");
   const dispatch = useDispatch();
 
   const toggleConversation = () => {
@@ -62,13 +69,14 @@ function Widget({
   const handleMessageSubmit = (event) => {
     event.preventDefault();
     const userInput = event.target.message.value;
-    
-    if (!userInput.trim()) {      
-      return;      
+
+    //if no message
+    if (!userInput.trim()) {
+      return;
     }
 
     handleSubmit?.(userInput);
-    dispatch(addUserMessage(userInput));
+    // dispatch(addUserMessage(userInput));
     handleNewUserMessage(userInput);
     event.target.message.value = '';
   }
@@ -101,6 +109,9 @@ function Widget({
       imagePreview={imagePreview}
       zoomStep={zoomStep}
       showEmoji={showEmoji}
+      input={input}
+      setInput={setInput}
+      handleSelectEmoji={handleSelectEmoji}
     />
   );
 }

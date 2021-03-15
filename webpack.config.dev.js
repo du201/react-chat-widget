@@ -20,7 +20,7 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     compress: false,
-    port: 3000,
+    port: 7000,
     hot: true
   },
   resolve: {
@@ -72,7 +72,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [path.resolve(__dirname,'src/scss')]
+              includePaths: [path.resolve(__dirname, 'src/scss')]
             }
           }
         ]
