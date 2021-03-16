@@ -17,8 +17,32 @@
   }
 }
 
+.message-author-right {
+  text-align: right;
+}
+
+.message-author-text-right {
+  position: relative;
+  right: 20px;
+  top: 8px;
+  font-size: 10px;
+}
+
+.message-author-left {
+  text-align: left;
+}
+
+.message-author-text-left {
+  position: relative;
+  right: -20px;
+  top: 8px;
+  font-size: 10px;
+}
+
 @media screen and (max-width: 800px)  {
   .rcw-messages-container {
     @include messages-container-fs;
   }
 }
+
+

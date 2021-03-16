@@ -4,12 +4,12 @@ import store from '.';
 import * as actions from './actions';
 import { LinkParams, ImageState } from './types';
 
-export function addUserMessage(text: string, id?: string) {
-  store.dispatch(actions.addUserMessage(text, id));
+export function addUserMessage(text: string, author: string, time: string, id?: string) {
+  store.dispatch(actions.addUserMessage(text, author, time, id));
 }
 
-export function addResponseMessage(text: string, id?: string) {
-  store.dispatch(actions.addResponseMessage(text, id));
+export function addResponseMessage(text: string, author: string, time: string, id?: string) {
+  store.dispatch(actions.addResponseMessage(text, author, time, id));
 }
 
 export function addLinkSnippet(link: LinkParams, id?: string) {

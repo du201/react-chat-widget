@@ -37,6 +37,10 @@ type Props = {
   input: string;
   setInput: AnyFunction;
   handleSelectEmoji: AnyFunction;
+  handleRoomSelect: (any) => any;
+  currentRoom: string;
+  courseChatRooms: string[];
+  privateChatRooms: string[];
 }
 
 function WidgetLayout({
@@ -63,7 +67,11 @@ function WidgetLayout({
   showEmoji,
   input,
   setInput,
-  handleSelectEmoji
+  handleSelectEmoji,
+  handleRoomSelect,
+  currentRoom,
+  courseChatRooms,
+  privateChatRooms
 }: Props) {
   const dispatch = useDispatch();
   const { dissableInput, showChat, visible } = useSelector((state: GlobalState) => ({
@@ -143,6 +151,10 @@ function WidgetLayout({
           input={input}
           setInput={setInput}
           handleSelectEmoji={handleSelectEmoji}
+          handleRoomSelect={handleRoomSelect}
+          currentRoom={currentRoom}
+          courseChatRooms={courseChatRooms}
+          privateChatRooms={privateChatRooms}
         />
       }
       {customLauncher ?

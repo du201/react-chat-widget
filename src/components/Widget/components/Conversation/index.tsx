@@ -30,6 +30,10 @@ type Props = {
   input: string;
   setInput: AnyFunction;
   handleSelectEmoji: AnyFunction;
+  handleRoomSelect: (any) => any;
+  currentRoom: string;
+  courseChatRooms: string[];
+  privateChatRooms: string[];
 };
 
 function Conversation({
@@ -51,7 +55,11 @@ function Conversation({
   showEmoji,
   input,
   setInput,
-  handleSelectEmoji
+  handleSelectEmoji,
+  handleRoomSelect,
+  currentRoom,
+  courseChatRooms,
+  privateChatRooms
 }: Props) {
   return (
     <div className={cn('rcw-conversation-container', className)} aria-live="polite">
@@ -61,6 +69,10 @@ function Conversation({
         toggleChat={toggleChat}
         showCloseButton={showCloseButton}
         titleAvatar={titleAvatar}
+        handleRoomSelect={handleRoomSelect}
+        currentRoom={currentRoom}
+        courseChatRooms={courseChatRooms}
+        privateChatRooms={privateChatRooms}
       />
       <Messages profileAvatar={profileAvatar} showTimeStamp={showTimeStamp} />
       <QuickButtons onQuickButtonClicked={onQuickButtonClicked} />

@@ -32,6 +32,10 @@ type Props = {
   input: string;
   setInput: AnyFunction;
   handleSelectEmoji: AnyFunction;
+  handleRoomSelect: (any) => any;
+  currentRoom: string;
+  courseChatRooms: string[];
+  privateChatRooms: string[];
 } & typeof defaultProps;
 
 function ConnectedWidget({
@@ -58,7 +62,11 @@ function ConnectedWidget({
   showEmoji,
   input,
   setInput,
-  handleSelectEmoji
+  handleSelectEmoji,
+  handleRoomSelect,
+  currentRoom,
+  courseChatRooms,
+  privateChatRooms
 }: Props) {
   return (
     <Provider store={store}>
@@ -87,6 +95,10 @@ function ConnectedWidget({
         input={input}
         setInput={setInput}
         handleSelectEmoji={handleSelectEmoji}
+        handleRoomSelect={handleRoomSelect}
+        currentRoom={currentRoom}
+        courseChatRooms={courseChatRooms}
+        privateChatRooms={privateChatRooms}
       />
     </Provider>
   );

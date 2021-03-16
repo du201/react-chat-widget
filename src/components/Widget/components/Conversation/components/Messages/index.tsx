@@ -4,6 +4,8 @@ import format from 'date-fns/format';
 
 import { scrollToBottom } from '../../../../../../utils/messages';
 import { Message, Link, CustomCompMessage, GlobalState } from '../../../../../../store/types';
+import { MESSAGE_SENDER } from '../../../../../../constants';
+
 import { setBadgeCount, markAllMessagesRead } from '@actions';
 
 import Loader from './components/Loader';
@@ -30,7 +32,7 @@ function Messages({ profileAvatar, showTimeStamp }: Props) {
     if (showChat && badgeCount) dispatch(markAllMessagesRead());
     else dispatch(setBadgeCount(messages.filter((message) => message.unread).length));
   }, [messages, badgeCount, showChat]);
-    
+
   const getComponentToRender = (message: Message | Link | CustomCompMessage) => {
     const ComponentToRender = message.component;
     if (message.type === 'component') {
@@ -50,16 +52,22 @@ function Messages({ profileAvatar, showTimeStamp }: Props) {
   return (
     <div id="messages" className="rcw-messages-container" ref={messageRef}>
       {messages?.map((message, index) =>
-        <div className="rcw-message" key={`${index}-${format(message.timestamp, 'hh:mm')}`}>
-          {profileAvatar &&
-            message.showAvatar &&
-            <img src={profileAvatar} className="rcw-avatar" alt="profile" />
-          }
-          {getComponentToRender(message)}
-        </div>
-      )}
+        <React.Fragment key={`${index}-${format(message.timestamp, 'hh:mm')}`}>
+          <div className={message.sender === MESSAGE_SENDER.CLIENT ? "message-author-right" : "message-author-left"}>
+            <span className={message.sender === MESSAGE_SENDER.CLIENT ? "message-author-text-right" : "message-author-text-left"}>{message.author}</span>
+          </div>
+          <div className="rcw-message" key={`${index}-${format(message.timestamp, 'hh:mm')}`}>
+            {profileAvatar &&
+              message.showAvatar &&
+              <img src={profileAvatar} className="rcw-avatar" alt="profile" />
+            }
+            {getComponentToRender(message)}
+          </div>
+        </React.Fragment>
+      )
+      }
       <Loader typing={typing} />
-    </div>
+    </div >
   );
 }
 

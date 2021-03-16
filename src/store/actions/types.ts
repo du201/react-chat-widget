@@ -29,12 +29,16 @@ export interface ToggleInputDisabled {
 export interface AddUserMessage {
   type: typeof ADD_NEW_USER_MESSAGE;
   text: string;
+  author: string;
+  time: string;
   id?: string;
 }
 
 export interface AddResponseMessage {
   type: typeof ADD_NEW_RESPONSE_MESSAGE;
   text: string;
+  author: string;
+  time: string;
   id?: string;
 }
 
@@ -88,7 +92,7 @@ export interface MarkAllMessagesRead {
 export type BehaviorActions = ToggleChat | ToggleInputDisabled | ToggleMsgLoader;
 
 export type MessagesActions = AddUserMessage | AddResponseMessage | AddLinkSnippet | RenderCustomComponent
-                              | DropMessages | HideAvatar | DeleteMessages | MarkAllMessagesRead | SetBadgeCount;
+  | DropMessages | HideAvatar | DeleteMessages | MarkAllMessagesRead | SetBadgeCount;
 
 export type QuickButtonsActions = SetQuickButtons;
 

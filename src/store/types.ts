@@ -9,6 +9,8 @@ type BaseMessage = {
   unread: boolean;
   customId?: string;
   props?: any;
+  author?: string;
+  time?: string;
 }
 
 export interface Message extends BaseMessage {

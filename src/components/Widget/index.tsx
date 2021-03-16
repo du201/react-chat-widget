@@ -31,6 +31,10 @@ type Props = {
   input: string;
   setInput: AnyFunction;
   handleSelectEmoji: AnyFunction;
+  handleRoomSelect: (any) => any;
+  currentRoom: string;
+  courseChatRooms: string[];
+  privateChatRooms: string[];
 }
 
 function Widget({
@@ -57,7 +61,11 @@ function Widget({
   showEmoji,
   input,
   setInput,
-  handleSelectEmoji
+  handleSelectEmoji,
+  handleRoomSelect,
+  currentRoom,
+  courseChatRooms,
+  privateChatRooms
 }: Props) {
   // let [input, setInput] = useState("");
   const dispatch = useDispatch();
@@ -112,6 +120,10 @@ function Widget({
       input={input}
       setInput={setInput}
       handleSelectEmoji={handleSelectEmoji}
+      handleRoomSelect={handleRoomSelect}
+      currentRoom={currentRoom}
+      courseChatRooms={courseChatRooms}
+      privateChatRooms={privateChatRooms}
     />
   );
 }

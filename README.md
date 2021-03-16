@@ -191,10 +191,14 @@ export default App;
 |prop|type|required|default value|description|
 |---|--- |---     |---          |---        |
 |**handleNewUserMessage**|(...args: any[]) => any|YES| |Function to handle the user input, will receive the "full text message" when submitted (used for sending)|
-|**handleTextInputChange**|(event) => any|NO| |Prop that triggers on input change|
-|**input**|string|NO| |user input from the chat enter box, should be a state|
-|**setInput**|(event) => any|NO| |same as onKeyPress of an input|
-|**showEmoji**|boolean|NO| |whether to enable the emoji functionality|
+|**handleTextInputChange**|(event) => any|YES| |Prop that triggers on input change|
+|**input**|string|YES| |user input from the chat enter box, should be a state|
+|**setInput**|(event) => any|YES| |same as onKeyPress of an input|
+|**showEmoji**|boolean|YES| |whether to enable the emoji functionality|
+|**handleRoomSelect**|(event) => any|YES| |triggers when select a new chat room|
+|**currentRoom**|string|YES| |the current chat room as a string|
+|**courseChatRooms**|string[]|YES| |an array of all the course chat rooms that the user has joined|
+|**privateChatRooms**|string[]|YES| |an array of all the personal chat rooms that the user has joined|
 
 #### Styles
 
@@ -221,12 +225,16 @@ As of v3.0, messages now have an optional ID that can be added on creation.If yo
 - **addResponseMessage**
   - params:
     - text: string
+    - author: string 
+    - time: string (the time this message was sent)
     - id: string (optional)
   - Method to add a new message written as a response to a user input.
 
 - **addUserMessage**
   - params: 
     - text: string
+    - author: string 
+    - time: string (the time this message was sent)
     - id: string (optional)
   - This method will add a new message written as a user. Keep in mind it will not trigger the prop handleNewUserMessage()
 
