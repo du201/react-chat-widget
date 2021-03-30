@@ -9,13 +9,13 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  showChat: false,
+  showChat: false, // whether the chat window is open
   disabledInput: false,
   messageLoader: false
 };
 
 const behaviorReducer = {
-  [TOGGLE_CHAT]: (state: BehaviorState) => ({ ...state, showChat: !state.showChat}),
+  [TOGGLE_CHAT]: (state: BehaviorState) => ({ ...state, showChat: !state.showChat }),
 
   [TOGGLE_INPUT_DISABLED]: (state: BehaviorState) => ({ ...state, disabledInput: !state.disabledInput }),
 

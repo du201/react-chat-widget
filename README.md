@@ -199,6 +199,7 @@ export default App;
 |**currentRoom**|string|YES| |the current chat room as a string|
 |**courseChatRooms**|string[]|YES| |an array of all the course chat rooms that the user has joined|
 |**privateChatRooms**|string[]|YES| |an array of all the personal chat rooms that the user has joined|
+|**handleScrollToTop**|() => any|YES| |this function gets called when the chat window is scrolled to the top (used to load new chat history)|
 
 #### Styles
 
@@ -222,21 +223,37 @@ That way, you can leave the JS clean and keep the styles within the CSS.
 
 As of v3.0, messages now have an optional ID that can be added on creation.If you want to add new messages, you can use the following methods:
 
-- **addResponseMessage**
+- **addResponseMessageToTop** (to be implemented)
   - params:
     - text: string
     - author: string 
     - time: string (the time this message was sent)
     - id: string (optional)
-  - Method to add a new message written as a response to a user input.
+  - Method to add a new message to the top of message stack on the left side of the chat window (sent by people other than the user). Used to add message received from server.
 
-- **addUserMessage**
+- **addUserMessageToTop** (to be implemented)
   - params: 
     - text: string
     - author: string 
     - time: string (the time this message was sent)
     - id: string (optional)
-  - This method will add a new message written as a user. Keep in mind it will not trigger the prop handleNewUserMessage()
+  - Method to add a new message to the top of message stack on the right side of the chat window (sent by the user). Used to add message received from server.
+
+- **addResponseMessageToBottom** (to be implemented)
+  - params:
+    - text: string
+    - author: string 
+    - time: string (the time this message was sent)
+    - id: string (optional)
+  - Method to add a new message to the bottom of message stack on the left side of the chat window (sent by people other than the user). Used to add message received from server.
+
+- **addUserMessageToBottom** (to be implemented)
+  - params: 
+    - text: string
+    - author: string 
+    - time: string (the time this message was sent)
+    - id: string (optional)
+  - Method to add a new message to the bottom of message stack on the right side of the chat window (sent by the user). Used to add message received from server.
 
 - **addLinkSnippet**
   - params:

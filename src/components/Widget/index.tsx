@@ -35,6 +35,7 @@ type Props = {
   currentRoom: string;
   courseChatRooms: string[];
   privateChatRooms: string[];
+  handleScrollToTop: any;
 }
 
 function Widget({
@@ -65,7 +66,8 @@ function Widget({
   handleRoomSelect,
   currentRoom,
   courseChatRooms,
-  privateChatRooms
+  privateChatRooms,
+  handleScrollToTop
 }: Props) {
   // let [input, setInput] = useState("");
   const dispatch = useDispatch();
@@ -124,6 +126,7 @@ function Widget({
       currentRoom={currentRoom}
       courseChatRooms={courseChatRooms}
       privateChatRooms={privateChatRooms}
+      handleScrollToTop={handleScrollToTop}
     />
   );
 }

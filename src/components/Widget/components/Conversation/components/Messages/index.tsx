@@ -13,10 +13,11 @@ import './styles.scss';
 
 type Props = {
   showTimeStamp: boolean,
-  profileAvatar?: string;
+  profileAvatar?: string,
+  handleScrollToTop: any
 }
 
-function Messages({ profileAvatar, showTimeStamp }: Props) {
+function Messages({ profileAvatar, showTimeStamp, handleScrollToTop }: Props) {
   const dispatch = useDispatch();
   const { messages, typing, showChat, badgeCount } = useSelector((state: GlobalState) => ({
     messages: state.messages.messages,
@@ -26,6 +27,8 @@ function Messages({ profileAvatar, showTimeStamp }: Props) {
   }));
 
   const messageRef = useRef<HTMLDivElement | null>(null);
+
+  // scrolls the text to bottom automatically when adding new messages
   useEffect(() => {
     // @ts-ignore
     scrollToBottom(messageRef.current);
@@ -49,8 +52,14 @@ function Messages({ profileAvatar, showTimeStamp }: Props) {
   //   }
   // }
 
+  const handleScroll = () => {
+    if (messageRef['current']!['scrollTop'] === 0) {
+      handleScrollToTop();
+    }
+  }
+
   return (
-    <div id="messages" className="rcw-messages-container" ref={messageRef}>
+    <div id="messages" className="rcw-messages-container" ref={messageRef} onScroll={handleScroll}>
       {messages?.map((message, index) =>
         <React.Fragment key={`${index}-${format(message.timestamp, 'hh:mm')}`}>
           <div className={message.sender === MESSAGE_SENDER.CLIENT ? "message-author-right" : "message-author-left"}>

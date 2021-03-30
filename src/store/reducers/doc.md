@@ -1,0 +1,1 @@
+Here stores all the reducers and the initial value of states

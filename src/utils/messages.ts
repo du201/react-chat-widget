@@ -90,8 +90,8 @@ function scrollWithSlowMotion(target: any, scrollStart: any, scroll: number) {
 
 export function scrollToBottom(messagesDiv: HTMLDivElement | null) {
   if (!messagesDiv) return;
-  const screenHeight = messagesDiv.clientHeight;
-  const scrollTop = messagesDiv.scrollTop;
-  const scrollOffset = messagesDiv.scrollHeight - (scrollTop + screenHeight);
+  const screenHeight = messagesDiv.clientHeight; //height including padding
+  const scrollTop = messagesDiv.scrollTop; // # of pixels that we have scrolled from the top
+  const scrollOffset = messagesDiv.scrollHeight - (scrollTop + screenHeight); // # of pixels that we need to scroll the screen down to reach the bottom
   if (scrollOffset) scrollWithSlowMotion(messagesDiv, scrollTop, scrollOffset);
 }

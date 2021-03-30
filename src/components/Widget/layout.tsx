@@ -41,6 +41,7 @@ type Props = {
   currentRoom: string;
   courseChatRooms: string[];
   privateChatRooms: string[];
+  handleScrollToTop: any;
 }
 
 function WidgetLayout({
@@ -71,7 +72,8 @@ function WidgetLayout({
   handleRoomSelect,
   currentRoom,
   courseChatRooms,
-  privateChatRooms
+  privateChatRooms,
+  handleScrollToTop
 }: Props) {
   const dispatch = useDispatch();
   const { dissableInput, showChat, visible } = useSelector((state: GlobalState) => ({
@@ -155,6 +157,7 @@ function WidgetLayout({
           currentRoom={currentRoom}
           courseChatRooms={courseChatRooms}
           privateChatRooms={privateChatRooms}
+          handleScrollToTop={handleScrollToTop}
         />
       }
       {customLauncher ?
