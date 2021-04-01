@@ -4,12 +4,20 @@ import store from '.';
 import * as actions from './actions';
 import { LinkParams, ImageState } from './types';
 
-export function addUserMessage(text: string, author: string, time: string, id?: string) {
-  store.dispatch(actions.addUserMessage(text, author, time, id));
+export function addUserMessageToBottom(text: string, author: string, time: string, id?: string) {
+  store.dispatch(actions.addUserMessageToBottom(text, author, time, id));
 }
 
-export function addResponseMessage(text: string, author: string, time: string, id?: string) {
-  store.dispatch(actions.addResponseMessage(text, author, time, id));
+export function addResponseMessageToBottom(text: string, author: string, time: string, id?: string) {
+  store.dispatch(actions.addResponseMessageToBottom(text, author, time, id));
+}
+
+export function addUserMessageToTop(text: string, author: string, time: string, id?: string) {
+  store.dispatch(actions.addUserMessageToTop(text, author, time, id));
+}
+
+export function addResponseMessageToTop(text: string, author: string, time: string, id?: string) {
+  store.dispatch(actions.addResponseMessageToTop(text, author, time, id));
 }
 
 export function addLinkSnippet(link: LinkParams, id?: string) {

@@ -35,6 +35,7 @@ type Props = {
   courseChatRooms: string[];
   privateChatRooms: string[];
   handleScrollToTop: any;
+  loading: boolean;
 };
 
 function Conversation({
@@ -61,7 +62,8 @@ function Conversation({
   currentRoom,
   courseChatRooms,
   privateChatRooms,
-  handleScrollToTop
+  handleScrollToTop,
+  loading
 }: Props) {
   return (
     <div className={cn('rcw-conversation-container', className)} aria-live="polite">
@@ -80,6 +82,7 @@ function Conversation({
         profileAvatar={profileAvatar}
         showTimeStamp={showTimeStamp}
         handleScrollToTop={handleScrollToTop}
+        loading={loading}
       />
       <QuickButtons onQuickButtonClicked={onQuickButtonClicked} />
       <Sender

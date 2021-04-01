@@ -90,8 +90,23 @@ function scrollWithSlowMotion(target: any, scrollStart: any, scroll: number) {
 
 export function scrollToBottom(messagesDiv: HTMLDivElement | null) {
   if (!messagesDiv) return;
-  const screenHeight = messagesDiv.clientHeight; //height including padding
+  const screenHeight = messagesDiv.clientHeight; //height of the visible chat window
   const scrollTop = messagesDiv.scrollTop; // # of pixels that we have scrolled from the top
+  // scrollHeight is the total height of the chat window (including the part hidden by the scrollbar)
   const scrollOffset = messagesDiv.scrollHeight - (scrollTop + screenHeight); // # of pixels that we need to scroll the screen down to reach the bottom
+  console.log(messagesDiv.clientHeight, messagesDiv.scrollTop, messagesDiv.scrollHeight);
   if (scrollOffset) scrollWithSlowMotion(messagesDiv, scrollTop, scrollOffset);
+}
+
+let prevScrollHeight = 0;
+
+export function maintainScrollPosition(messagesDiv: HTMLDivElement | null) {
+  if (!messagesDiv) return;
+
+  const scrollHeightDiff = messagesDiv.scrollHeight - prevScrollHeight;
+  const scrollOffset = messagesDiv.scrollHeight - (messagesDiv.scrollTop + messagesDiv.scrollHeight);
+
+  if (scrollOffset) scrollWithSlowMotion(messagesDiv, messagesDiv.scrollTop, scrollHeightDiff);
+
+  prevScrollHeight = messagesDiv.scrollHeight;
 }

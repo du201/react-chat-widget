@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { toggleChat, addUserMessage } from '../../store/actions';
+import { toggleChat } from '../../store/actions';
 import { AnyFunction } from '../../utils/types';
 
 import WidgetLayout from './layout';
@@ -36,6 +36,7 @@ type Props = {
   courseChatRooms: string[];
   privateChatRooms: string[];
   handleScrollToTop: any;
+  loading: boolean;
 }
 
 function Widget({
@@ -67,7 +68,8 @@ function Widget({
   currentRoom,
   courseChatRooms,
   privateChatRooms,
-  handleScrollToTop
+  handleScrollToTop,
+  loading
 }: Props) {
   // let [input, setInput] = useState("");
   const dispatch = useDispatch();
@@ -86,7 +88,6 @@ function Widget({
     }
 
     handleSubmit?.(userInput);
-    // dispatch(addUserMessage(userInput));
     handleNewUserMessage(userInput);
     event.target.message.value = '';
   }
@@ -127,6 +128,7 @@ function Widget({
       courseChatRooms={courseChatRooms}
       privateChatRooms={privateChatRooms}
       handleScrollToTop={handleScrollToTop}
+      loading={loading}
     />
   );
 }

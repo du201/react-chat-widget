@@ -6,8 +6,10 @@ export const TOGGLE_CHAT = 'BEHAVIOR/TOGGLE_CHAT';
 export const TOGGLE_INPUT_DISABLED = 'BEHAVIOR/TOGGLE_INPUT_DISABLED';
 export const TOGGLE_MESSAGE_LOADER = 'BEHAVIOR/TOGGLE_MSG_LOADER';
 export const SET_BADGE_COUNT = 'BEHAVIOR/SET_BADGE_COUNT';
-export const ADD_NEW_USER_MESSAGE = 'MESSAGES/ADD_NEW_USER_MESSAGE';
-export const ADD_NEW_RESPONSE_MESSAGE = 'MESSAGES/ADD_NEW_RESPONSE_MESSAGE';
+export const ADD_NEW_USER_MESSAGE_BOTTOM = 'MESSAGES/ADD_NEW_USER_MESSAGE_BOTTOM';
+export const ADD_NEW_RESPONSE_MESSAGE_BOTTOM = 'MESSAGES/ADD_NEW_RESPONSE_MESSAGE_BOTTOM';
+export const ADD_NEW_USER_MESSAGE_TOP = 'MESSAGES/ADD_NEW_USER_MESSAGE_TOP';
+export const ADD_NEW_RESPONSE_MESSAGE_TOP = 'MESSAGES/ADD_NEW_RESPONSE_MESSAGE_TOP';
 export const ADD_NEW_LINK_SNIPPET = 'MESSAGES/ADD_NEW_LINK_SNIPPET';
 export const ADD_COMPONENT_MESSAGE = 'MESSAGES/ADD_COMPONENT_MESSAGE';
 export const DROP_MESSAGES = 'MESSAGES/DROP_MESSAGES';
@@ -27,7 +29,7 @@ export interface ToggleInputDisabled {
 }
 
 export interface AddUserMessage {
-  type: typeof ADD_NEW_USER_MESSAGE;
+  type: typeof ADD_NEW_USER_MESSAGE_BOTTOM | typeof ADD_NEW_USER_MESSAGE_TOP;
   text: string;
   author: string;
   time: string;
@@ -35,7 +37,7 @@ export interface AddUserMessage {
 }
 
 export interface AddResponseMessage {
-  type: typeof ADD_NEW_RESPONSE_MESSAGE;
+  type: typeof ADD_NEW_RESPONSE_MESSAGE_BOTTOM | typeof ADD_NEW_RESPONSE_MESSAGE_TOP;
   text: string;
   author: string;
   time: string;

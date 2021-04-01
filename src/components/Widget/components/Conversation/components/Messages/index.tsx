@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, ElementRef, ImgHTMLAttributes, Mous
 import { useSelector, useDispatch } from 'react-redux';
 import format from 'date-fns/format';
 
-import { scrollToBottom } from '../../../../../../utils/messages';
+import { scrollToBottom, maintainScrollPosition } from '../../../../../../utils/messages';
 import { Message, Link, CustomCompMessage, GlobalState } from '../../../../../../store/types';
 import { MESSAGE_SENDER } from '../../../../../../constants';
 
@@ -14,10 +14,11 @@ import './styles.scss';
 type Props = {
   showTimeStamp: boolean,
   profileAvatar?: string,
-  handleScrollToTop: any
+  handleScrollToTop: any,
+  loading: boolean
 }
 
-function Messages({ profileAvatar, showTimeStamp, handleScrollToTop }: Props) {
+function Messages({ profileAvatar, showTimeStamp, handleScrollToTop, loading }: Props) {
   const dispatch = useDispatch();
   const { messages, typing, showChat, badgeCount } = useSelector((state: GlobalState) => ({
     messages: state.messages.messages,
@@ -31,9 +32,14 @@ function Messages({ profileAvatar, showTimeStamp, handleScrollToTop }: Props) {
   // scrolls the text to bottom automatically when adding new messages
   useEffect(() => {
     // @ts-ignore
-    scrollToBottom(messageRef.current);
-    if (showChat && badgeCount) dispatch(markAllMessagesRead());
-    else dispatch(setBadgeCount(messages.filter((message) => message.unread).length));
+    console.log("loading is: " + loading)
+    if (loading) {
+      maintainScrollPosition(messageRef.current);
+    } else {
+      scrollToBottom(messageRef.current);
+      if (showChat && badgeCount) dispatch(markAllMessagesRead());
+      else dispatch(setBadgeCount(messages.filter((message) => message.unread).length));
+    }
   }, [messages, badgeCount, showChat]);
 
   const getComponentToRender = (message: Message | Link | CustomCompMessage) => {

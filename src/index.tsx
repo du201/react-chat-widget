@@ -37,6 +37,7 @@ type Props = {
   courseChatRooms: string[];
   privateChatRooms: string[];
   handleScrollToTop: any;
+  loading: boolean;
 } & typeof defaultProps;
 
 function ConnectedWidget({
@@ -68,7 +69,8 @@ function ConnectedWidget({
   currentRoom,
   courseChatRooms,
   privateChatRooms,
-  handleScrollToTop
+  handleScrollToTop,
+  loading
 }: Props) {
   return (
     <Provider store={store}>
@@ -102,6 +104,7 @@ function ConnectedWidget({
         courseChatRooms={courseChatRooms}
         privateChatRooms={privateChatRooms}
         handleScrollToTop={handleScrollToTop}
+        loading={loading}
       />
     </Provider>
   );

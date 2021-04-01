@@ -223,7 +223,7 @@ That way, you can leave the JS clean and keep the styles within the CSS.
 
 As of v3.0, messages now have an optional ID that can be added on creation.If you want to add new messages, you can use the following methods:
 
-- **addResponseMessageToTop** (to be implemented)
+- **addResponseMessageToTop**
   - params:
     - text: string
     - author: string 
@@ -231,7 +231,7 @@ As of v3.0, messages now have an optional ID that can be added on creation.If yo
     - id: string (optional)
   - Method to add a new message to the top of message stack on the left side of the chat window (sent by people other than the user). Used to add message received from server.
 
-- **addUserMessageToTop** (to be implemented)
+- **addUserMessageToTop**
   - params: 
     - text: string
     - author: string 
@@ -239,7 +239,7 @@ As of v3.0, messages now have an optional ID that can be added on creation.If yo
     - id: string (optional)
   - Method to add a new message to the top of message stack on the right side of the chat window (sent by the user). Used to add message received from server.
 
-- **addResponseMessageToBottom** (to be implemented)
+- **addResponseMessageToBottom**
   - params:
     - text: string
     - author: string 
@@ -247,7 +247,7 @@ As of v3.0, messages now have an optional ID that can be added on creation.If yo
     - id: string (optional)
   - Method to add a new message to the bottom of message stack on the left side of the chat window (sent by people other than the user). Used to add message received from server.
 
-- **addUserMessageToBottom** (to be implemented)
+- **addUserMessageToBottom**
   - params: 
     - text: string
     - author: string 
@@ -295,6 +295,9 @@ You can also control certain actions of the widget:
 
 - **toggleMsgLoader**
   - Toggles the message loader that shows as a "typing..." style.
+
+- **dropMessages**
+  - Simply deletes all the messenges
 
 - **deleteMessages***
   - params:

@@ -15,9 +15,9 @@ export function toggleInputDisabled(): actionsTypes.ToggleInputDisabled {
   };
 }
 
-export function addUserMessage(text: string, author: string, time: string, id?: string): actionsTypes.AddUserMessage {
+export function addUserMessageToBottom(text: string, author: string, time: string, id?: string): actionsTypes.AddUserMessage {
   return {
-    type: actionsTypes.ADD_NEW_USER_MESSAGE,
+    type: actionsTypes.ADD_NEW_USER_MESSAGE_BOTTOM,
     text,
     author,
     time,
@@ -25,9 +25,29 @@ export function addUserMessage(text: string, author: string, time: string, id?: 
   };
 }
 
-export function addResponseMessage(text: string, author: string, time: string, id?: string): actionsTypes.AddResponseMessage {
+export function addResponseMessageToBottom(text: string, author: string, time: string, id?: string): actionsTypes.AddResponseMessage {
   return {
-    type: actionsTypes.ADD_NEW_RESPONSE_MESSAGE,
+    type: actionsTypes.ADD_NEW_RESPONSE_MESSAGE_BOTTOM,
+    text,
+    author,
+    time,
+    id
+  };
+}
+
+export function addUserMessageToTop(text: string, author: string, time: string, id?: string): actionsTypes.AddUserMessage {
+  return {
+    type: actionsTypes.ADD_NEW_USER_MESSAGE_TOP,
+    text,
+    author,
+    time,
+    id
+  };
+}
+
+export function addResponseMessageToTop(text: string, author: string, time: string, id?: string): actionsTypes.AddResponseMessage {
+  return {
+    type: actionsTypes.ADD_NEW_RESPONSE_MESSAGE_TOP,
     text,
     author,
     time,

@@ -5,8 +5,10 @@ import { createNewMessage, createLinkSnippet, createComponentMessage } from '../
 import { MESSAGE_SENDER } from '../../constants';
 import {
   MessagesActions,
-  ADD_NEW_USER_MESSAGE,
-  ADD_NEW_RESPONSE_MESSAGE,
+  ADD_NEW_USER_MESSAGE_BOTTOM,
+  ADD_NEW_RESPONSE_MESSAGE_BOTTOM,
+  ADD_NEW_USER_MESSAGE_TOP,
+  ADD_NEW_RESPONSE_MESSAGE_TOP,
   ADD_NEW_LINK_SNIPPET,
   ADD_COMPONENT_MESSAGE,
   DROP_MESSAGES,
@@ -22,11 +24,17 @@ const initialState = {
 };
 
 const messagesReducer = {
-  [ADD_NEW_USER_MESSAGE]: (state: MessagesState, { text, id, author, time }) =>
+  [ADD_NEW_USER_MESSAGE_BOTTOM]: (state: MessagesState, { text, id, author, time }) =>
     ({ ...state, messages: [...state.messages, createNewMessage(text, MESSAGE_SENDER.CLIENT, author, time, id)] }),
 
-  [ADD_NEW_RESPONSE_MESSAGE]: (state: MessagesState, { text, id, author, time }) =>
+  [ADD_NEW_RESPONSE_MESSAGE_BOTTOM]: (state: MessagesState, { text, id, author, time }) =>
     ({ ...state, messages: [...state.messages, createNewMessage(text, MESSAGE_SENDER.RESPONSE, author, time, id)], badgeCount: state.badgeCount + 1 }),
+
+  [ADD_NEW_USER_MESSAGE_TOP]: (state: MessagesState, { text, id, author, time }) =>
+    ({ ...state, messages: [createNewMessage(text, MESSAGE_SENDER.CLIENT, author, time, id), ...state.messages] }),
+
+  [ADD_NEW_RESPONSE_MESSAGE_TOP]: (state: MessagesState, { text, id, author, time }) =>
+    ({ ...state, messages: [createNewMessage(text, MESSAGE_SENDER.RESPONSE, author, time, id), ...state.messages], badgeCount: state.badgeCount + 1 }),
 
   [ADD_NEW_LINK_SNIPPET]: (state: MessagesState, { link, id }) =>
     ({ ...state, messages: [...state.messages, createLinkSnippet(link, id)] }),

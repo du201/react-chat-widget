@@ -1,13 +1,18 @@
+import { Widget as ChatWidget, addResponseMessageToBottom, addUserMessageToBottom, addResponseMessageToTop, addUserMessageToTop, setQuickButtons, toggleMsgLoader, addLinkSnippet } from '../index';
+import './Chat.css';
+
+
+
 import React, { useState, useEffect } from 'react';
-import { Widget as ChatWidget, addResponseMessage, addUserMessage, setQuickButtons, toggleMsgLoader, addLinkSnippet } from '../index';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
-import './Chat.css';
 
 const client = new W3CWebSocket('ws://127.0.0.1:8000/ws/chat/coursemeta/123');
 
-export default function App() {
+function Chat() {
   let [input, setInput] = useState(""); // message input
   let [currentRoom, setCurrentRoom] = useState(""); // the current chat room
   let [moreHistoryToLoad, setMoreHistoryToLoad] = useState(false);
@@ -27,9 +32,9 @@ export default function App() {
       let date = new Date(messageFromServer.message.timestamp);
       console.log(typeof date)
       if (messageFromServer.sender) { // if the sender of the message is this instance itself
-        addUserMessage(messageFromServer.message.text, messageFromServer.user.username, convertTimeFormat(date)); // display the message on the right side
+        addUserMessageToTop(messageFromServer.message.text + ' ' + messageFromServer.id, messageFromServer.user.username, convertTimeFormat(date)); // display the message on the right side
       } else {
-        addResponseMessage(messageFromServer.message.text, messageFromServer.user.username, convertTimeFormat(date));
+        addResponseMessageToTop(messageFromServer.message.text + ' ' + messageFromServer.id, messageFromServer.user.username, convertTimeFormat(date));
       }
     };
   }, []);
@@ -39,6 +44,12 @@ export default function App() {
 
     // if room selection is not empty
     if (currentRoom !== "") {
+
+      // empty the chat window
+      dropMessages();
+
+      // display the loading sign
+      toggleMsgLoader();
 
       // by default, assume no chat history when switch to a new chat room, and start loading from page 1
       setMoreHistoryToLoad(false);
@@ -54,8 +65,12 @@ export default function App() {
             let chatHistory = res.data.results;
             chatHistory.reverse().forEach((message) => {
               let date = new Date(message.message.timestamp);
-              addResponseMessage(message.message.text, message.user.username, convertTimeFormat(date));
+              console.log(message);
+              addResponseMessageToBottom(message.message.text + ' ' + message.id, message.user.username, convertTimeFormat(date)); // todo: ask William to add "sender" data
             });
+
+            // undisplay the loading sign
+            toggleMsgLoader();
 
             // check whether more history exists
             if (res.data.next !== null) {
@@ -138,6 +153,9 @@ export default function App() {
     setCurrentRoom(e.key);
   };
 
+  /**
+   * When the chat window is scrolled to the top
+   */
   let handleScrollToTop = () => {
     console.log(nextHistoryPageToLoad);
     console.log(moreHistoryToLoad);
@@ -152,7 +170,7 @@ export default function App() {
             let chatHistory = res.data.results;
             chatHistory.reverse().forEach((message) => {
               let date = new Date(message.message.timestamp);
-              addResponseMessage(message.message.text, message.user.username, convertTimeFormat(date));
+              addResponseMessageToBottom(message.message.text + ' ' + message.id, message.user.username, convertTimeFormat(date));
             });
 
             // check whether more history exists
@@ -167,9 +185,14 @@ export default function App() {
     }
   }
 
+  function addmessage() {
+    for (let i = 0; i <= 30; i++) {
+      addUserMessageToBottom("messageFromSer", "sdfsddfsdf", "23");
+    }
+  }
+
   return (
     <div>
-      {/* <button onClick={toggleMsgLoader}>toggle</button> */}
       <ChatWidget
         handleNewUserMessage={handleNewUserMessage}
         title="ECE666"
@@ -184,7 +207,12 @@ export default function App() {
         handleScrollToTop={handleScrollToTop}
         courseChatRooms={["ece437", "ece301", "ece302"]}
         privateChatRooms={["William", "Andy", "John"]}
+        loading={true}
       />
+      <button onClick={addmessage}>add message</button>
     </div>
   );
 }
+
+export default Chat;
+
