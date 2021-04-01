@@ -106,7 +106,7 @@ export function maintainScrollPosition(messagesDiv: HTMLDivElement | null) {
   const scrollHeightDiff = messagesDiv.scrollHeight - prevScrollHeight;
   const scrollOffset = messagesDiv.scrollHeight - (messagesDiv.scrollTop + messagesDiv.scrollHeight);
 
-  if (scrollOffset) scrollWithSlowMotion(messagesDiv, messagesDiv.scrollTop, scrollHeightDiff);
+  if (scrollOffset) scrollWithSlowMotion(messagesDiv, messagesDiv.scrollTop, 0);
 
   prevScrollHeight = messagesDiv.scrollHeight;
 }

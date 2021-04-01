@@ -66,6 +66,7 @@ function Messages({ profileAvatar, showTimeStamp, handleScrollToTop, loading }: 
 
   return (
     <div id="messages" className="rcw-messages-container" ref={messageRef} onScroll={handleScroll}>
+      <Loader typing={typing} />
       {messages?.map((message, index) =>
         <React.Fragment key={`${index}-${format(message.timestamp, 'hh:mm')}`}>
           <div className={message.sender === MESSAGE_SENDER.CLIENT ? "message-author-right" : "message-author-left"}>
@@ -81,7 +82,6 @@ function Messages({ profileAvatar, showTimeStamp, handleScrollToTop, loading }: 
         </React.Fragment>
       )
       }
-      <Loader typing={typing} />
     </div >
   );
 }
