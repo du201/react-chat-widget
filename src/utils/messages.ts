@@ -68,8 +68,8 @@ function sinEaseOut(timestamp: any, begining: any, change: any, duration: any) {
 /**
  * 
  * @param {*} target scroll target
- * @param {*} scrollStart
- * @param {*} scroll scroll distance
+ * @param {*} scrollStart the start position calculating from the top. DO NOT use negative number here
+ * @param {*} scroll scroll distance used to scroll towards the bottom, if it's a negative number, no scroll effect would happen. 
  */
 function scrollWithSlowMotion(target: any, scrollStart: any, scroll: number) {
   const raf = window?.requestAnimationFrame;
@@ -94,7 +94,7 @@ export function scrollToBottom(messagesDiv: HTMLDivElement | null) {
   const scrollTop = messagesDiv.scrollTop; // # of pixels that we have scrolled from the top
   // scrollHeight is the total height of the chat window (including the part hidden by the scrollbar)
   const scrollOffset = messagesDiv.scrollHeight - (scrollTop + screenHeight); // # of pixels that we need to scroll the screen down to reach the bottom
-  console.log(messagesDiv.clientHeight, messagesDiv.scrollTop, messagesDiv.scrollHeight);
+  // console.log(messagesDiv.clientHeight, messagesDiv.scrollTop, messagesDiv.scrollHeight);
   if (scrollOffset) scrollWithSlowMotion(messagesDiv, scrollTop, scrollOffset);
 }
 
@@ -106,7 +106,9 @@ export function maintainScrollPosition(messagesDiv: HTMLDivElement | null) {
   const scrollHeightDiff = messagesDiv.scrollHeight - prevScrollHeight;
   const scrollOffset = messagesDiv.scrollHeight - (messagesDiv.scrollTop + messagesDiv.scrollHeight);
 
-  if (scrollOffset) scrollWithSlowMotion(messagesDiv, messagesDiv.scrollTop, 0);
-
+  // console.log(messagesDiv.clientHeight, messagesDiv.scrollTop, messagesDiv.scrollHeight);
+  // if (scrollOffset) scrollWithSlowMotion(messagesDiv, messagesDiv.scrollTop, scrollHeightDiff);
+  // if (scrollOffset) scrollWithSlowMotion(messagesDiv, 500, 100);
+  messagesDiv.scrollTop += scrollHeightDiff;
   prevScrollHeight = messagesDiv.scrollHeight;
 }

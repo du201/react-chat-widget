@@ -200,6 +200,7 @@ export default App;
 |**courseChatRooms**|string[]|YES| |an array of all the course chat rooms that the user has joined|
 |**privateChatRooms**|string[]|YES| |an array of all the personal chat rooms that the user has joined|
 |**handleScrollToTop**|() => any|YES| |this function gets called when the chat window is scrolled to the top (used to load new chat history)|
+|**loading**|boolean|YES| |if loading is true, scroll position should be the same after adding new messages. If loading is false, scroll position goes to the bottom|
 
 #### Styles
 

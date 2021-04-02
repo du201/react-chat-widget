@@ -186,9 +186,10 @@ function Chat() {
   }
 
   function addmessage() {
-    for (let i = 0; i <= 30; i++) {
-      addUserMessageToBottom("messageFromSer", "sdfsddfsdf", "23");
-    }
+    // for (let i = 0; i <= 30; i++) {
+    //   addUserMessageToBottom("messageFromSer", "sdfsddfsdf", "23");
+    // }
+    toggleMsgLoader();
   }
 
   return (

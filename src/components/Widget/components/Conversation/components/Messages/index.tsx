@@ -32,7 +32,7 @@ function Messages({ profileAvatar, showTimeStamp, handleScrollToTop, loading }: 
   // scrolls the text to bottom automatically when adding new messages
   useEffect(() => {
     // @ts-ignore
-    console.log("loading is: " + loading)
+    // console.log("loading is: " + loading)
     if (loading) {
       maintainScrollPosition(messageRef.current);
     } else {
